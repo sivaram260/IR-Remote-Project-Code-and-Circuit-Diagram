@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to do a IR Remote Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="Main">
+    <h1>How to do a IR Remote Project</h1>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/p6k2wSF2AwQ"></iframe>
+    <br>
+<h1>Circuit Diagram</h1>
+        <img src="Diagram.png" alt="Circuit Diagram" height="400px">
+        </div><h1>Code For Arduino</h1>
+        <p>int IR_Recv = 2; //IR Receiver Pin 2<br>
+            IRrecv irrecv(IR_Recv);<br>
+            decode_results results;<br><br>
+            
+            void setup(){<br>
+              pinMode(3, OUTPUT);<br>
+              Serial.begin(9600); //starts serial communication<br>
+              irrecv.enableIRIn(); // Starts the receiver<br>
+              pinMode(4, OUTPUT);<br>
+              Serial.begin(9600); //starts serial communication<br>
+              irrecv.enableIRIn(); // Starts the receiver<br>
+              pinMode(5, OUTPUT);<br>
+              Serial.begin(9600); //starts serial communication<br>
+              irrecv.enableIRIn(); // Starts the receiver<br>
+            }<br><br>
+            
+            void loop(){<br>
+              if (irrecv.decode(&results)){<br>
+                long int decCode = results.value;<br>
+                Serial.println(decCode);<br>
+                if (results.value == 16582903) //Select button<br>
+                {<br>
+                  digitalWrite(3, HIGH);<br>
+                  Serial.println(" Green LED turned ON");<br>
+                }<br>
+                if (results.value == 16580863) //Power button<br>
+                {<br>
+                  digitalWrite(3, LOW);<br>
+                  Serial.println(" Green LED turned OFF");<br>
+                }<br><br>
+                
+                
+                
+                
+                if (results.value == 16615543) //Select button<br>
+                {<br>
+                  digitalWrite(4, HIGH);<br>
+                  Serial.println(" Blue LED turned ON");<br>
+                }<br>
+                 if (results.value == 16580863) //Power button<br>
+                {<br>
+                  digitalWrite(4, LOW);<br>
+                  Serial.println(" Blue LED turned OFF");<br>
+                }<br><br>
+                
+                
+                
+                
+                
+                if (results.value == 16599223) //Select button<br>
+                {<br>
+                  digitalWrite(5, HIGH);<br>
+                  Serial.println(" Red LED turned ON");<br>
+                }<br>
+                 if (results.value == 16580863) //Power button<br>
+                {<br>
+                  digitalWrite(5, LOW);<br>
+                  Serial.println(" Red LED turned OFF");<br>
+                }<br>
+                irrecv.resume();<br>
+              }<br>
+            }</p>
+
+           <a href="https://youtu.be/p6k2wSF2AwQ">CLick here to Watch on Youtube</a>
+</body>
+</html>
